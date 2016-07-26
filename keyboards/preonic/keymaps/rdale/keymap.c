@@ -12,12 +12,14 @@
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
+#define _F_KEYS 3
 #define _ADJUST 16
 
 enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
-  RAISE
+  RAISE,
+  F_KEYS
 };
 
 // Fillers to make layering more clear
@@ -36,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | Shift|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      | Alt  | GUI  | Lower| Enter| Space| Raise| Left | Down |  Up  | Right|
+ * | Ctrl |      | Alt  | GUI  | Lower| Enter| Space| Raise| Left | Down |  Up  | Right|
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
@@ -44,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS},
   {KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT},
-  {KC_LCTL, XXXXXXX, KC_LALT, KC_LGUI, LOWER,   KC_ENT,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_LCTL, F_KEYS,  KC_LALT, KC_LGUI, LOWER,   KC_ENT,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
 
 /* Lower
@@ -70,7 +72,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |  ESC |      |      |      |      |      |      |      |      |      |      | Del  |
+ * |  ESC |      |      |   ~  |   `  |      |      |   #  |   ^  |      |      | Del  |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |   %  |   &  |   ?  |   +  |   @  |   $  |   _  |   [  |   ]  |   !  |      |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      |   /  |   (  |   =  |   0  |   {  |   }  |   1  |   *  |   )  |   -  |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |   6  |   7  |   8  |   9  |   |  |   \  |   2  |   3  |   4  |   5  |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      | Vol- | Vol+ |  CTL |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_RAISE] = {
+  {KC_ESC,  _______, _______, KC_TILD,    KC_GRV,  _______, _______, KC_HASH, KC_CIRC, _______, _______, KC_DEL},
+  {_______, KC_PERC, KC_AMPR, S(KC_SLSH), KC_PLUS, KC_AT,   KC_DLR,  KC_UNDS, KC_LBRC, KC_RBRC, KC_EXLM, _______},
+  {_______, KC_SLSH, KC_LPRN, KC_EQL,     KC_0,    KC_LCBR, KC_RCBR, KC_1,    KC_ASTR, KC_RPRN, KC_MINS, _______},
+  {_______, KC_6,    KC_7,    KC_8,       KC_9,    KC_PIPE, KC_BSLS, KC_2,    KC_3,    KC_4,    KC_5,    _______},
+  {_______, _______, _______, _______,    _______, _______, _______, _______, _______, KC_VOLD, KC_VOLU, KC_RCTL}
+},
+
+/* F Keys
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -78,15 +101,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      | Vol- | Vol+ |  CTL |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = {
-  {KC_ESC,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL},
+[_F_KEYS] = {
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
-  {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+  {_______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, _______, _______, _______},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLD, KC_VOLU, KC_RCTL}
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* Adjust (Lower + Raise)
@@ -141,6 +164,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
             #endif
             persistant_default_layer_set(1UL<<_QWERTY);
+          }
+          return false;
+          break;
+        case F_KEYS:
+          if (record->event.pressed) {
+	    layer_on(_F_KEYS);
+          } else {
+            layer_off(_F_KEYS);
           }
           return false;
           break;
