@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* hand-wired pin-out */
 #define MATRIX_ROW_PINS { B0, B3, D2, D5, D4 }
-#define MATRIX_COL_PINS { B1, B2, B7, D0, D1, D3, C6, C7, D7, B5, F7, F6, F5, F4, F2, F0 }
+#define MATRIX_COL_PINS { F0, F1, F4, F5, F6, F7, B5, D7, C7, C6, D3, D1, D0, B7, B2, B1 }
 #define UNUSED_PINS { B6, B4 }
 
 /* COL2ROW or ROW2COL */
