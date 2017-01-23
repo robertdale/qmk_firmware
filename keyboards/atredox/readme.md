@@ -1,6 +1,10 @@
-Preonic keyboard firmware
+Atredox keyboard firmware
 ======================
-DIY/Assembled compact ortholinear 50% keyboard by [Ortholinear Keyboards](http://ortholinearkeyboards.com).
+DIY/Assembled compact keyboard by Robert Dale
+
+## Switch plate
+
+Based on https://github.com/profet23/atreus62.git
 
 ## Quantum MK Firmware
 
@@ -8,7 +12,7 @@ For the full Quantum feature list, see [the parent readme.md](/readme.md).
 
 ## Building
 
-Download or clone the whole firmware and navigate to the keyboards/preonic folder. Once your dev env is setup, you'll be able to type `make` to generate your .hex - you can then use `make dfu` to program your PCB once you hit the reset button. 
+Download or clone the whole firmware and navigate to the keyboards/atredox folder. Once your dev env is setup, you'll be able to type `make` to generate your .hex - you can then use `make dfu` to program your PCB once you hit the reset button. 
 
 Depending on which keymap you would like to use, you will have to compile slightly differently.
 
@@ -21,7 +25,7 @@ Several version of keymap are available in advance but you are recommended to de
 To build the firmware binary hex file with a keymap just do `make` with a keymap like this:
 
 ```
-$ make [default|jack|<name>]
+$ make [default|<name>]
 ```
 
 Keymaps follow the format **__\<name\>.c__** and are stored in the `keymaps` folder.
